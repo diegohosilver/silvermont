@@ -1,0 +1,282 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/SilverMont.master.cs" Inherits="SilverMont" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>SilverMont</title>
+    <link rel="shorcut icon" href="images/sm.ico" />
+    <link rel="stylesheet" href="assets/css/animate.css"/>
+    <link rel="stylesheet" href="assets/css/prettyPhoto.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/css/jquery-ui.css" />
+    <script src="assets/js/jquery.min.js"></script>
+    <script>
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ social_tools: false, modal: true });
+            $("#demo01").animatedModal({
+                animatedIn: 'bounceInDown',
+                animatedOut: 'bounceOutUp',
+                color: '#1c2422'
+            });
+            $("#demo02").animatedModal({
+                modalTarget:'animatedModal2',
+                animatedIn: 'bounceInDown',
+                animatedOut: 'bounceOutUp',
+                color: '#1c2422'
+            });
+            $("#demo03").animatedModal({
+                modalTarget: 'animatedModal2',
+                animatedIn: 'bounceInDown',
+                animatedOut: 'bounceOutUp',
+                color: '#1c2422'
+            });
+            datepicker();
+        });
+        function alFondo() {
+            $("html, body").animate({ scrollTop: $(document).height() }, 700);
+        }
+        function OpenPF(url) {
+            try {
+                $.prettyPhoto.open(url + '&iframe=true&width=1600&height=800', '', '');
+            } catch (e) {
+                alert(e.message);
+            }
+        };
+        function ClosePF() {
+            try {
+                window.parent.Refresh();
+                window.parent.$.prettyPhoto.close();
+            } catch (e) {
+                alert(e.message);
+            }
+        };
+    </script>
+    <style>
+        .no-js #loader { display: none;  }
+        .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+        .se-pre-con {
+	    position: fixed;
+	    left: 0px;
+	    top: 0px;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 9999;
+	    background: url(images/loader-64x/Preloader_2.gif) center no-repeat #fff;
+}
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+    <body class="homepage">
+    <form id="form2" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+		<div id="page-wrapper">
+			<!-- Header -->
+			<header id="header">
+				<div class="logo container">
+					<div>
+						<h1><a href="Inicio.aspx" id="logo">SilverMont</a></h1>
+						<p>Series</p>
+					</div>
+				</div>
+			</header>
+            <asp:Panel ID="panel" runat="server">
+			<!-- Nav -->
+            <asp:Panel ID="BarraNav" runat="server" Visible="false" >
+				<nav id="nav">
+					<ul>
+						<li><a href="Inicio.aspx">Inicio</a></li>
+                        <li><a href="NoticiasArchivo.aspx">Noticias</a></li>
+						<li><a href="Series.aspx">Series</a></li>						
+                        <li><a id="demo01" href="#animatedModal">Iniciar Sesión</a></li>
+					</ul>
+				</nav>
+             </asp:Panel>
+            <!-- Nav Sesion Admin -->
+            <asp:Panel ID="BarraNavSesionAdmin" runat="server" Visible="false" >
+				<nav id="nav">
+					<ul>
+						<li><a href="Inicio.aspx">Inicio</a></li>
+                        <li>
+                            <a href="#">Noticias</a>
+                            <ul>
+                                <li><a href="NoticiasArchivo.aspx">Noticias</a></li>
+                                <li><a href="ABMNoticias.aspx">Administrar</a></li>
+                            </ul>
+                        </li>
+						<li>
+							<a href="#">Series</a>
+							<ul>
+								<li><a href="Series.aspx">Catálogo Completo</a></li>
+                                <li>
+                                    <a href="#">Administrar</a>
+                                    <ul>
+                                        <li><a href="ABMSeries.aspx">Series y Temporadas</a></li>
+                                        <li><a href="ABMCapitulos.aspx">Capitulos</a></li>
+                                    </ul>
+                                </li>
+							</ul>
+						</li>						
+                        <li>
+                            <a href="#"><div id="zzz" runat="server"></div></a>
+                            <ul>
+                                <li><a id="demo03" href="#animatedModal2">Cambiar Contraseña</a></li>
+                                <li><asp:LinkButton ID="LinkButton1" OnClick="btnCerrarSesion_Click" runat="server" Text="Cerrar Sesión"></asp:LinkButton></li>
+                            </ul>
+                        </li>
+					</ul>
+				</nav>
+             </asp:Panel>
+            <!-- Nav Sesion -->
+            <asp:Panel ID="BarraNavSesion" runat="server" Visible="false" >
+				<nav id="nav">
+					<ul>
+						<li><a href="Inicio.aspx">Inicio</a></li>
+                        <li><a href="NoticiasArchivo.aspx">Noticias</a></li>
+						<li>
+							<a href="#">Series</a>
+							<ul>
+								<li><a href="#">Novedades</a></li>
+								<li><a href="#">Mejor Puntuadas</a></li>
+								<li><a href="#">Buscar</a></li>
+								<li><a href="Series.aspx">Catálogo Completo</a></li>
+							</ul>
+						</li>						
+                        <li>
+                            <a href="#"><div id="xxx" runat="server"></div></a>
+                            <ul>
+                                <li><a id="demo02" href="#animatedModal2">Cambiar Contraseña</a></li>
+                                <li><asp:LinkButton ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" Text="Cerrar Sesión"></asp:LinkButton></li>
+                            </ul>
+                        </li>
+					</ul>
+				</nav>
+             </asp:Panel>
+            </asp:Panel>
+            <!-- Contenido de paginas -->
+              <div class="se-pre-con"></div>            
+             <!--Cambiar Contraseña-->
+                <div id="animatedModal2">
+                    <div class="close-animatedModal2"> 
+                        <input type="button" class="button" value="X"/>
+                    </div>
+            
+                    <div class="modal-content">
+                              <asp:UpdatePanel ID="panelPassword" runat="server">
+                                    <ContentTemplate>
+                                        <section class="box highlight">
+										<header>
+											<h2>Ingresa tu nueva contraseña</h2>
+                                            <br />
+                                            <p>Usuario<asp:Label ID="lblUsuario" runat="server" style="Width:200px; margin-left:210px; margin-bottom:20px; display:inline-block"></asp:Label></p>
+                                            <p>Nueva Contraseña<asp:TextBox ID="txtNewPassword" runat="server" style="Width:200px; margin-left:102px; display:inline-block" TextMode="Password"></asp:TextBox></p>
+                                            <p>Confirmar Contraseña<asp:TextBox ID="txtConfirmNewPassword" runat="server" style="Width:200px; margin-left:50px; display:inline-block" TextMode="Password"></asp:TextBox></p>
+                                            <br />
+                                            <asp:Button ID="btnNewPassword" CssClass="button" runat="server" OnClick="btnNewPassword_Click" Text="Cambiar Contraseña"/>
+                                            <br />
+                                            <br />
+                                            <p><asp:Label ID="lblErrorContraseña" runat="server" style="color:red" Visible="false"></asp:Label></p>
+                                        </header>
+									</section>
+                                    </ContentTemplate>
+                            </asp:UpdatePanel>
+                    </div>
+                </div>
+                    
+                <div id="animatedModal">
+                    <div class="close-animatedModal" style="padding-top:5px;"> 
+                        <input type="button" class="button" value="X"/>
+                    </div>           
+                    <div class="modal-content">
+                        <asp:UpdatePanel ID="contenidoModal" runat="server">
+                            <ContentTemplate>
+                                <!--Contenido del modal Iniciar Sesion-->
+                             <asp:Panel ID="pnSesion" runat="server">
+                              <section class="box highlight">
+										<header>
+											<h2>Inicia sesion para disfrutar de todas nuestras caracteristicas</h2>
+                                            <br />
+                                            <p>Usuario<asp:TextBox ID="txtUser" runat="server" style="Width:200px; margin-left:60px; display:inline-block"></asp:TextBox></p>
+                                            <p>Contraseña<asp:TextBox ID="txtPassword" runat="server" style="Width:200px; margin-left:18px; display:inline-block" TextMode="Password"></asp:TextBox></p>
+                                            <br />
+                                            <asp:Button ID="btnLogin" runat="server" CssClass="button" Text="Iniciar Sesión" OnClick="btnLogin_Click" /><asp:Button ID="btnRegistro" OnClick="btnRegistro_Click" runat="server" CssClass="button" Text="Registrate!" />
+                                            <br />
+                                            <br />
+                                            <p><asp:Label ID="lblError" runat="server" style="color:red" Visible="false"></asp:Label></p>
+                                        </header>
+									</section>
+                                 </asp:Panel>
+                                <!--Contenido del modal Registro-->
+                                <asp:Panel ID="pnRegistro" runat="server" Visible="false">
+                                    <section class="box highlight">
+										<header>
+											<h2>No tenes usuario? Completá tus datos para ser parte de esta comunidad!</h2>
+                                            <br />
+                                            <p>Usuario<asp:TextBox ID="txtRegistroUser" runat="server" style="Width:200px; margin-left:150px; display:inline-block"></asp:TextBox></p>
+                                            <p>Contraseña<asp:TextBox ID="txtRegistroPassword" runat="server" style="Width:200px; margin-left:108px; display:inline-block" TextMode="Password"></asp:TextBox></p>
+                                            <p>Nombre y Apellido<asp:TextBox ID="txtNombreApellido" runat="server" style="width:200px; margin-left:35px; display:inline-block"></asp:TextBox></p>
+                                            <p>Email<asp:TextBox ID="txtEmail" runat="server" style="width:200px; margin-left:175px; display:inline-block"></asp:TextBox></p>
+                                            <br />
+                                            <asp:Button ID="btnSesion" CssClass="button" runat="server" OnClick="btnSesion_Click" Text="Iniciar Sesión"/><asp:Button ID="btnConfirmarRegistro" OnClick="btnConfirmarRegistro_Click" runat="server" CssClass="button" Text="Registrate!" />
+                                            <br />
+                                            <br />
+                                            <p><asp:Label ID="lblErrorRegistro" runat="server" style="color:red" Visible="false"></asp:Label></p>
+                                        </header>
+									</section>
+                                </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                
+            </asp:ContentPlaceHolder>
+			<!-- Footer -->
+				<footer id="footer" class="container">
+					<div class="row 200%">
+						<div class="12u">
+
+							<!-- About -->
+								<section>
+									<h2 class="major"><span onclick="alFondo();" style="cursor:pointer; cursor:hand;">Quienes somos?</span></h2>
+									<p>
+										Esto es <strong>SilverMont</strong>, un proyecto creado por Ramiro Montero y Diego Silvera de Souza.
+									</p>
+								</section>
+
+						</div>
+					</div>
+					<!-- Copyright -->
+						<div id="copyright">
+							<ul class="menu">
+								<li>&copy; Todos los derechos reservados</li><li>Diseño: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+
+				</footer>
+
+			</div>
+
+		<!-- Scripts -->
+            <script src="assets/js/datepicker.js"></script>
+            <script src="assets/js/animatedModal.min.js"></script>
+            <script src="assets/js/jquery.prettyPhoto.js"></script>
+            <script src="assets/js/owl.carousel.min.js"></script>
+            <script src="assets/js/jquery-ui.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/skel-viewport.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+    </form>
+</body>
+</html>
